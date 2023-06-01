@@ -31,6 +31,7 @@
 #include <limits.h>
 #include <float.h>
 #include <ctype.h>
+#include <stdint.h>
 
 #if USE_STRCASECMP
 #include <strings.h>
@@ -578,8 +579,8 @@ static int alloc_cellseg(scheme *sc, int n) {
          i = ++sc->last_cell_seg ;
          sc->alloc_seg[i] = cp;
          /* adjust in TYPE_BITS-bit boundary */
-         if(((unsigned long)cp)%adj!=0) {
-           cp=(char*)(adj*((unsigned long)cp/adj+1));
+         if(((uintptr_t)cp)%adj!=0) {
+           cp=(char*)(adj*((uintptr_t)cp/adj+1));
          }
          /* insert new segment in address order */
          newp=(pointer)cp;
