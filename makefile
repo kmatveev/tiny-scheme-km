@@ -16,6 +16,7 @@ LIBPREFIX =
 OUT = -out:$@
 RM= -del
 AR= echo
+PLATFORM_FEATURES=
 
 # Unix, generally
 #CC = gcc -fpic -pedantic
@@ -53,6 +54,7 @@ AR= echo
 #AR= ar crs
 #LD = gcc
 #LDFLAGS = -shared
+#CC_LDFLAGS=
 #SYS_LIBS= -lm
 
 
@@ -83,7 +85,9 @@ STATICLIBTARGET = $(LIBPREFIX)tinyscheme.$(LIBsuf)
 
 all: $(LIBTARGET) $(STATICLIBTARGET) scheme$(EXE_EXT)
 
-%.$(Osuf): %.c
+.SUFFIXES: .c .$(Osuf)
+
+.c.$(Osuf):
 	$(CC) -I. -c $(DEBUG) $(FEATURES) $(DL_FLAGS) $<
 
 $(LIBTARGET): $(OBJS)
