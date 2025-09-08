@@ -4964,6 +4964,7 @@ int main(int argc, char **argv) {
   char *file_name=InitFile;
   int retcode;
   int isfile=1;
+  setvbuf(stdout, NULL, _IONBF, 0); //helps with redirected output
 
   if(argc==1) {
     printf(banner);
